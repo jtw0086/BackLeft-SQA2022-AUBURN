@@ -9,7 +9,7 @@
 echo "Returning directory of repo"
 git rev-parse --show-toplevel
 echo "Creating report on all python files"
-bandit -q -r "$(git rev-parse --show-toplevel)" -f csv -o "$(git rev-parse --show-toplevel)/outputs/out.csv"
+bandit -q -r "$(git rev-parse --show-toplevel)" -f csv -o "$(git rev-parse --show-toplevel)/outputs/bandit_out.csv"
 echo "Check outputs for generated spreadsheet"
 # if git rev-parse --verify HEAD >/dev/null 2>&1
 # then
