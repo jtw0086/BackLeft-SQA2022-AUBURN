@@ -7,6 +7,7 @@ import time
 from datetime import datetime
 
 def giveTimeStamp():
+  change = False
   tsObj = time.time()
   strToret = datetime.fromtimestamp(tsObj).strftime('%Y-%m-%d %H:%M:%S')
   return strToret
