@@ -13,7 +13,7 @@ def giveTimeStamp():
   return strToret
    
     
-def checkTestFile(path2dir): 
+def checkTestFile(path2dir):
     """
     Check if project includes tests.
     We look for files that start with test (or tests, Test, Tests) or end with test.py (tests.py,
