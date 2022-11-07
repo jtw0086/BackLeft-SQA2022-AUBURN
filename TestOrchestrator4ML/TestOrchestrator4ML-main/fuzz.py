@@ -3,6 +3,7 @@ import random
 import string
 import detection
 import label_perturbation_attack
+from detection import main
 
 
 def fuzz():
@@ -29,6 +30,7 @@ def fuzz_function1():
     print("Fuzzing Method: checkTestFile")
     print("="*50)
     fuzz_input = random_fuzz_int()
+    # detect_test.checkTestFile(fuzz_input)
     try:
         detect_test.checkTestFile(fuzz_input)
     except:
@@ -46,13 +48,14 @@ def fuzz_function2():
     print("Fuzzing Method: get_test_details")
     print("=" * 50)
     fuzz_input = random_fuzz_int()
+    # main.get_test_details(fuzz_input)
     try:
-        detection.main.get_test_details(fuzz_input)
+        main.get_test_details(fuzz_input)
     except:
         print("Failed! Method: get_test_details. Input: " + str(fuzz_input))
     fuzz_input = random_fuzz_string()
     try:
-        detection.main.get_test_details(fuzz_input)
+        main.get_test_details(fuzz_input)
     except:
         print("Failed! Method: get_test_details. Input: " + str(fuzz_input))
     return
@@ -63,6 +66,7 @@ def fuzz_function3():
     print("Fuzzing Method: getPythonParseObject")
     print("=" * 50)
     fuzz_input = random_fuzz_int()
+    # detection.py_parser.getPythonParseObject(fuzz_input)
     try:
         detection.py_parser.getPythonParseObject(fuzz_input)
     except:
@@ -80,6 +84,7 @@ def fuzz_function4():
     print("Fuzzing Method: runs")
     print("=" * 50)
     fuzz_input = random_fuzz_int()
+    # label_perturbation_attack.cliffsDelta.runs(fuzz_input)
     try:
         label_perturbation_attack.cliffsDelta.runs(fuzz_input)
     except:
@@ -98,6 +103,7 @@ def fuzz_function5():
     print("=" * 50)
     fuzz_input1 = random_fuzz_int()
     fuzz_input2 = random_fuzz_int()
+    # label_perturbation_attack.knn.euc_dist(fuzz_input1, fuzz_input2)
     try:
         label_perturbation_attack.knn.euc_dist(fuzz_input1, fuzz_input2)
     except:
