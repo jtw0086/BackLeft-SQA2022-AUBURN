@@ -4,6 +4,7 @@ import string
 import detection
 import label_perturbation_attack
 from detection import main
+from fuzz_values import fuzz_values
 
 
 def fuzz():
@@ -40,6 +41,11 @@ def fuzz_function1():
         detect_test.checkTestFile(fuzz_input)
     except:
         print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
+    fuzz_input = random.choice(fuzz_values)
+    try:
+        detect_test.checkTestFile(fuzz_input)
+    except:
+        print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
     return
 
 
@@ -58,6 +64,11 @@ def fuzz_function2():
         main.get_test_details(fuzz_input)
     except:
         print("Failed! Method: get_test_details. Input: " + str(fuzz_input))
+    fuzz_input = random.choice(fuzz_values)
+    try:
+        main.get_test_details(fuzz_input)
+    except:
+        print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
     return
 
 
@@ -76,6 +87,11 @@ def fuzz_function3():
         detection.py_parser.getPythonParseObject(fuzz_input)
     except:
         print("Failed! Method: getPythonParseObject. Input: " + str(fuzz_input))
+    fuzz_input = random.choice(fuzz_values)
+    try:
+        detection.py_parser.getPythonParseObject(fuzz_input)
+    except:
+        print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
     return
 
 
@@ -94,6 +110,11 @@ def fuzz_function4():
         label_perturbation_attack.cliffsDelta.runs(fuzz_input)
     except:
         print("Failed! Method: getPythonParseObject. Input: " + str(fuzz_input))
+    fuzz_input = random.choice(fuzz_values)
+    try:
+        label_perturbation_attack.cliffsDelta.runs(fuzz_input)
+    except:
+        print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
     return
 
 
@@ -114,6 +135,12 @@ def fuzz_function5():
         label_perturbation_attack.knn.euc_dist(fuzz_input1, fuzz_input2)
     except:
         print("Failed! Method: getPythonParseObject. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
+    fuzz_input1 = random.choice(fuzz_values)
+    fuzz_input1 = random.choice(fuzz_values)
+    try:
+        label_perturbation_attack.knn.euc_dist(fuzz_input1, fuzz_input2)
+    except:
+        print("Failed! Method: checkTestFile. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
     return
 
 
