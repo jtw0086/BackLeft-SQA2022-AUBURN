@@ -1,0 +1,77 @@
+==================================================
+Fuzzing Method: checkTestFile
+==================================================
+Failed! Method: checkTestFile. Input: -491104164
+Exception: 
+expected str, bytes or os.PathLike object, not int
+Total row:  0
+Test:  TEST    0.0
+dtype: float64
+
+Failed! Method: checkTestFile. Input: w6([aqQQ?7Jy\B'dS0?$"0P es|Y
+Exception: 
+Cannot save file into a non-existent directory: '../Output'
+Total row:  0
+Test:  TEST    0.0
+dtype: float64
+
+Failed! Method: checkTestFile. Input: AUX
+Exception: 
+Cannot save file into a non-existent directory: '../Output'
+
+==================================================
+Fuzzing Method: cliffsDelta
+==================================================
+Failed! Method: cliffsDelta. Inputs: 37020965, -322984118
+Exception: 
+object of type 'int' has no len()
+
+Passed! Ran without error.
+
+Passed! Ran without error.
+
+==================================================
+Fuzzing Method: attack_model
+==================================================
+Failed! Method: attack_model. Inputs: -863316282, 233390600, -695225214, -831319092
+Exception: 
+Expected 2D array, got scalar array instead:
+array=-863316282.
+Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
+
+Failed! Method: attack_model. Inputs: t6	haiF/.5Lb@RL_0\5@*^d4wjGo/:?#t}#p"F]Fmdo3PD1uN87l@Y'r"v}uCw-2,+k:;PC
+-"fm`x<Z&=qHoz!f&5^, >f}_}D, -Q}lr)<k[|fw' pEGRNc EQD*D@/-m{S{E`, [U,OU%'W8tv_;aME}C'7(u"-DFS<T+O
+Exception: 
+Expected 2D array, got scalar array instead:
+array=t6	haiF/.5Lb@RL_0\5@*^d4wjGo/:?#t}#p"F]Fmdo3PD1uN87l@Y'r"v}uCw-2,+k:;PC
+-"fm`x<Z&=qHoz!f&5^.
+Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
+
+Failed! Method: attack_model. Inputs: -., 0.0/0.0, ｀ｨ(´∀｀∩, ﷽
+Exception: 
+Expected 2D array, got scalar array instead:
+array=-..
+Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
+
+==================================================
+Fuzzing Method: runs
+==================================================
+Passed! Ran without error.
+
+Passed! Ran without error.
+
+Passed! Ran without error.
+
+==================================================
+Fuzzing Method: eucDist
+==================================================
+Passed! Ran without error.
+
+Failed! Method: eucDist. Inputs: h
+EV`[Q, :(XJ|`.U2(gvzITnTvdk9Fh~30}kZB
+Exception: 
+unsupported operand type(s) for -: 'str' and 'str'
+
+Failed! Method: eucDist. Inputs: "`'><script>\xE2\x80\x87javascript:alert(1)</script>, 0
+Exception: 
+unsupported operand type(s) for -: 'str' and 'str'
