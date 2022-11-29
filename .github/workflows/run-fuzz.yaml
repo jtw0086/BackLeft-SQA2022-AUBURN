@@ -11,4 +11,4 @@ jobs:
         uses: actions/checkout@main
       - name: Run fuzz file
         run: |
-          python ../TestOrchestrator4ML/TestOrchestrator4ML-main/fuzz.py
+          python TestOrchestrator4ML/TestOrchestrator4ML-main/fuzz.py
