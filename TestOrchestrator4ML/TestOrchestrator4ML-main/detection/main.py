@@ -5,6 +5,7 @@ import os
 import pandas as pd
 import py_parser 
 import numpy as np 
+import project_logger
 
 
 def giveTimeStamp():
@@ -18,6 +19,12 @@ def get_test_details(test_script):
     py_tree = py_parser.getPythonParseObject(test_script)
 #     print(test_script)
     func_assert_parameter_list  = py_parser.getTestNames( py_tree ) 
+
+    # Logging for test_script data
+    # Format is file, function, input
+    mainLogger = project_logger.projectLogger()
+    mainLogger.info('{}*{}*{}'.format('main.py', 'get_test_details', test_script))
+    
     for func_ in func_assert_parameter_list:
 #         print("###############")
 #         print(func_) 
@@ -36,6 +43,11 @@ def checkClassificationAlgoTest(test_script):
     print("algo check: ", test_script)
     py_tree = py_parser.getPythonParseObject(test_script)
     classification_algo_list = py_parser.getClassificationAlgoNames( py_tree ) 
+
+    # Log test imput test_script and result classification_algo_list
+    mainLogger = project_logger.projectLogger()
+    mainLogger.info('{}*{}*{}*{}*{}'.format('main.py', 'chackAttackTest', test_script, classification_algo_list))
+
     if len(classification_algo_list) > 0:
         return 0
     else:
@@ -46,6 +58,11 @@ def checkAccuracyTest(test_script):
     print("metric check: ", test_script)
     py_tree = py_parser.getPythonParseObject(test_script)
     metric_list = py_parser.getMetricNames( py_tree ) 
+
+    # Log accuracy test imput test_script and result metric_list 
+    mainLogger = project_logger.projectLogger()
+    mainLogger.info('{}*{}*{}*{}*{}'.format('main.py', 'chackAttackTest', test_script, metric_list))
+
     if len(metric_list) > 0:
         return 0
     else:
@@ -53,6 +70,7 @@ def checkAccuracyTest(test_script):
     
     
 def chackAttackTest(test_script, assert_list):
+
     attack_check = []
     print("attack check: ", test_script)
     py_tree = py_parser.getPythonParseObject(test_script)
@@ -61,6 +79,11 @@ def chackAttackTest(test_script, assert_list):
         for assert_item in assert_list:
             if item in assert_item[2]:
                 attack_check.append(item)
+
+    # Log attack imputs test_script/assert_list and attack test result 
+    mainLogger = project_logger.projectLogger()
+    mainLogger.info('{}*{}*{}*{}*{}'.format('main.py', 'chackAttackTest', test_script, assert_list, attack_check))
+            
     if len(attack_check) > 1:
         return 0
     else:
@@ -187,6 +210,7 @@ def runDete(inp_dir, test_output_csv, test_assert_output_csv, flag_output_csv):
     flag_df = flag_df.sort_values('FLAG_COUNT').drop_duplicates('PROJECT', keep='first')
     flag_df = flag_df.drop('FLAG_COUNT', axis=1)
     flag_df.to_csv(flag_output_csv ,index=False, encoding= constants.UTF_ENCODING)  
+
 
 if __name__=='__main__': 
 

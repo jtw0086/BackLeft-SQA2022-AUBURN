@@ -17,12 +17,12 @@ def getImport(pyTree):
         for node_ in ast.walk(stmt_):
         	if isinstance(node_, ast.Import):
         		for name in node_.names:
-        			import_list.append( (name.name.split('.')[0] ) )
-        	elif isinstance(node_, ast.ImportFrom):
-        		if(node_.module is not None):
-        			import_list.append( ( node_.module.split('.')[0] ) )
+        		    import_list.append( (name.name.split('.')[0] ) )
+        elif isinstance(node_, ast.ImportFrom):
+            if(node_.module is not None):
+        		    import_list.append( ( node_.module.split('.')[0] ) )
         			for name in node_.names:
-        			    import_list.append( (name.name.split('.')[0] ) )
+                    import_list.append( (name.name.split('.')[0] ) )
 #     print("import list: ", import_list)
     return import_list 
     
