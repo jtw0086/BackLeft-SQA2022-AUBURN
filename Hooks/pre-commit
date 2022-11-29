@@ -11,12 +11,6 @@ git rev-parse --show-toplevel
 echo "Creating report on all python files"
 bandit -q -r "$(git rev-parse --show-toplevel)" -f csv -o "$(git rev-parse --show-toplevel)/outputs/bandit_out.csv"
 echo "Check outputs for generated spreadsheet"
-
-# The below portion runs the fuzz.py file when this hook is activated
-echo "Running fuzz.py"
-python3 "$(git rev-parse --show-toplevel)"/TestOrchestrator4ML/TestOrchestrator4ML-main/fuzz.py > "$(git rev-parse --show-toplevel)"/outputs/fuzz_out
-echo "Check outputs for fuzz results"
-
 # if git rev-parse --verify HEAD >/dev/null 2>&1
 # then
 # 	against=HEAD
