@@ -1,0 +1,14 @@
+name: Run Fuzzer
+
+on: ["push"]
+
+jobs:
+  fuzz:
+    name: Fuzz the Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@main
+
+      - name: Run fuzz file
+	run: python ../TestOrchestrator4ML/TestOrchestrator4ML-main/fuzz.py
