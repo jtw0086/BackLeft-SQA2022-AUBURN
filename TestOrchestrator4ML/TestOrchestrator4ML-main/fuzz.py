@@ -5,6 +5,7 @@ from label_perturbation_attack import cliffsDelta
 from label_perturbation_attack import knn
 from fuzz_values import fuzz_values
 
+# Author - Devin Spivey
 
 def fuzz():
 
