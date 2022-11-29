@@ -1,9 +1,8 @@
 import detect_test
 import random
 import string
-import detection
-import label_perturbation_attack
-from detection import main
+from label_perturbation_attack import cliffsDelta
+from label_perturbation_attack import knn
 from fuzz_values import fuzz_values
 
 
@@ -34,64 +33,105 @@ def fuzz_function1():
     # detect_test.checkTestFile(fuzz_input)
     try:
         detect_test.checkTestFile(fuzz_input)
-    except:
+        print("Passed! Ran without error.")
+    except Exception as e:
         print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
+        print("Exception: ")
+        print(e)
     fuzz_input = random_fuzz_string()
     try:
         detect_test.checkTestFile(fuzz_input)
-    except:
-        print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
+        print("\nPassed! Ran without error.")
+    except Exception as e:
+        print("\nFailed! Method: checkTestFile. Input: " + str(fuzz_input))
+        print("Exception: ")
+        print(e)
     fuzz_input = random.choice(fuzz_values)
     try:
         detect_test.checkTestFile(fuzz_input)
-    except:
-        print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
+        print("\nPassed! Ran without error.")
+    except Exception as e:
+        print("\nFailed! Method: checkTestFile. Input: " + str(fuzz_input))
+        print("Exception: ")
+        print(e)
     return
 
 
 def fuzz_function2():
     print("\n" + "=" * 50)
-    print("Fuzzing Method: get_test_details")
+    print("Fuzzing Method: cliffsDelta")
     print("=" * 50)
-    fuzz_input = random_fuzz_int()
-    # main.get_test_details(fuzz_input)
+    fuzz_input1 = random_fuzz_int()
+    fuzz_input2 = random_fuzz_int()
     try:
-        main.get_test_details(fuzz_input)
-    except:
-        print("Failed! Method: get_test_details. Input: " + str(fuzz_input))
-    fuzz_input = random_fuzz_string()
+        cliffsDelta.cliffsDelta(fuzz_input1, fuzz_input2, dull=[0.147, 0.33, 0.474][0])
+        print("Passed! Ran without error.")
+    except Exception as e:
+        print("Failed! Method: cliffsDelta. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
+        print("Exception: ")
+        print(e)
+    fuzz_input1 = random_fuzz_string()
+    fuzz_input2 = random_fuzz_string()
     try:
-        main.get_test_details(fuzz_input)
-    except:
-        print("Failed! Method: get_test_details. Input: " + str(fuzz_input))
-    fuzz_input = random.choice(fuzz_values)
+        cliffsDelta.cliffsDelta(fuzz_input1, fuzz_input2, dull=[0.147, 0.33, 0.474][0])
+        print("\nPassed! Ran without error.")
+    except Exception as e:
+        print("\nFailed! Method: cliffsDelta. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
+        print("Exception: ")
+        print(e)
+    fuzz_input1 = random.choice(fuzz_values)
+    fuzz_input2 = random.choice(fuzz_values)
     try:
-        main.get_test_details(fuzz_input)
-    except:
-        print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
+        cliffsDelta.cliffsDelta(fuzz_input1, fuzz_input2, dull=[0.147, 0.33, 0.474][0])
+        print("\nPassed! Ran without error.")
+    except Exception as e:
+        print("\nFailed! Method: cliffsDelta. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
+        print("Exception: ")
+        print(e)
     return
 
 
 def fuzz_function3():
     print("\n" + "=" * 50)
-    print("Fuzzing Method: getPythonParseObject")
+    print("Fuzzing Method: attack_model")
     print("=" * 50)
-    fuzz_input = random_fuzz_int()
+    fuzz_input1 = random_fuzz_int()
+    fuzz_input2 = random_fuzz_int()
+    fuzz_input3 = random_fuzz_int()
+    fuzz_input4 = random_fuzz_int()
     # detection.py_parser.getPythonParseObject(fuzz_input)
     try:
-        detection.py_parser.getPythonParseObject(fuzz_input)
-    except:
-        print("Failed! Method: getPythonParseObject. Input: " + str(fuzz_input))
-    fuzz_input = random_fuzz_string()
+        knn.calculate_k(fuzz_input1, fuzz_input2, fuzz_input3, fuzz_input4)
+        print("Passed! Ran without error.")
+    except Exception as e:
+        print("Failed! Method: attack_model. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2) + ", " +\
+            str(fuzz_input3) + ", " + str(fuzz_input4))
+        print("Exception: ")
+        print(e)
+    fuzz_input1 = random_fuzz_string()
+    fuzz_input2 = random_fuzz_string()
+    fuzz_input3 = random_fuzz_string()
+    fuzz_input4 = random_fuzz_string()
     try:
-        detection.py_parser.getPythonParseObject(fuzz_input)
-    except:
-        print("Failed! Method: getPythonParseObject. Input: " + str(fuzz_input))
-    fuzz_input = random.choice(fuzz_values)
+        knn.calculate_k(fuzz_input1, fuzz_input2, fuzz_input3, fuzz_input4)
+        print("\nPassed! Ran without error.")
+    except Exception as e:
+        print("\nFailed! Method: attack_model. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2) + ", " + \
+        str(fuzz_input3) + ", " + str(fuzz_input4))
+        print("Exception: ")
+        print(e)
+    fuzz_input1 = random.choice(fuzz_values)
+    fuzz_input2 = random.choice(fuzz_values)
+    fuzz_input3 = random.choice(fuzz_values)
+    fuzz_input4 = random.choice(fuzz_values)
     try:
-        detection.py_parser.getPythonParseObject(fuzz_input)
-    except:
-        print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
+        knn.calculate_k(fuzz_input1, fuzz_input2, fuzz_input3, fuzz_input4)
+        print("\nPassed! Ran without error.")
+    except Exception as e:
+        print("\nFailed! Method: attack_model. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2) + ", " + \
+        str(fuzz_input3) + ", " + str(fuzz_input4))
+        print("Exception: ")
+        print(e)
     return
 
 
@@ -102,19 +142,28 @@ def fuzz_function4():
     fuzz_input = random_fuzz_int()
     # label_perturbation_attack.cliffsDelta.runs(fuzz_input)
     try:
-        label_perturbation_attack.cliffsDelta.runs(fuzz_input)
-    except:
-        print("Failed! Method: getPythonParseObject. Input: " + str(fuzz_input))
+        cliffsDelta.runs(fuzz_input)
+        print("Passed! Ran without error.")
+    except Exception as e:
+        print("Failed! Method: runs. Input: " + str(fuzz_input))
+        print("Exception: ")
+        print(e)
     fuzz_input = random_fuzz_string()
     try:
-        label_perturbation_attack.cliffsDelta.runs(fuzz_input)
-    except:
-        print("Failed! Method: getPythonParseObject. Input: " + str(fuzz_input))
+        cliffsDelta.runs(fuzz_input)
+        print("\nPassed! Ran without error.")
+    except Exception as e:
+        print("\nFailed! Method: runs. Input: " + str(fuzz_input))
+        print("Exception: ")
+        print(e)
     fuzz_input = random.choice(fuzz_values)
     try:
-        label_perturbation_attack.cliffsDelta.runs(fuzz_input)
-    except:
-        print("Failed! Method: checkTestFile. Input: " + str(fuzz_input))
+        cliffsDelta.runs(fuzz_input)
+        print("\nPassed! Ran without error.")
+    except Exception as e:
+        print("\nFailed! Method: runs. Input: " + str(fuzz_input))
+        print("Exception: ")
+        print(e)
     return
 
 
@@ -126,21 +175,30 @@ def fuzz_function5():
     fuzz_input2 = random_fuzz_int()
     # label_perturbation_attack.knn.euc_dist(fuzz_input1, fuzz_input2)
     try:
-        label_perturbation_attack.knn.euc_dist(fuzz_input1, fuzz_input2)
-    except:
-        print("Failed! Method: getPythonParseObject. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
+        knn.euc_dist(fuzz_input1, fuzz_input2)
+        print("Passed! Ran without error.")
+    except Exception as e:
+        print("Failed! Method: eucDist. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
+        print("Exception: ")
+        print(e)
     fuzz_input1 = random_fuzz_string()
     fuzz_input2 = random_fuzz_string()
     try:
-        label_perturbation_attack.knn.euc_dist(fuzz_input1, fuzz_input2)
-    except:
-        print("Failed! Method: getPythonParseObject. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
+        knn.euc_dist(fuzz_input1, fuzz_input2)
+        print("\nPassed! Ran without error.")
+    except Exception as e:
+        print("\nFailed! Method: eucDist. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
+        print("Exception: ")
+        print(e)
     fuzz_input1 = random.choice(fuzz_values)
-    fuzz_input1 = random.choice(fuzz_values)
+    fuzz_input2 = random.choice(fuzz_values)
     try:
-        label_perturbation_attack.knn.euc_dist(fuzz_input1, fuzz_input2)
-    except:
-        print("Failed! Method: checkTestFile. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
+        knn.euc_dist(fuzz_input1, fuzz_input2)
+        print("\nPassed! Ran without error.")
+    except Exception as e:
+        print("\nFailed! Method: eucDist. Inputs: " + str(fuzz_input1) + ", " + str(fuzz_input2))
+        print("Exception: ")
+        print(e)
     return
 
 
