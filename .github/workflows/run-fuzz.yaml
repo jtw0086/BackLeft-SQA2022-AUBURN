@@ -9,7 +9,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@main
-    
       - name: Run fuzz file
-	run: |
-	  python ../TestOrchestrator4ML/TestOrchestrator4ML-main/fuzz.py
+        run: |
+          python ../TestOrchestrator4ML/TestOrchestrator4ML-main/fuzz.py
