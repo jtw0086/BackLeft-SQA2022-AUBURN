@@ -1,3 +1,5 @@
+import site
+from tkinter import mainloop
 import constants
 import time 
 import datetime 
@@ -16,15 +18,15 @@ def giveTimeStamp():
 def get_test_details(test_script):
     test_name_list = []
     test_with_assert_list = []
-    py_tree = py_parser.getPythonParseObject(test_script)
-#     print(test_script)
-    func_assert_parameter_list  = py_parser.getTestNames( py_tree ) 
 
     # Logging for test_script data
     # Format is file, function, input
     mainLogger = project_logger.projectLogger()
-    mainLogger.info('{}*{}*{}'.format('main.py', 'get_test_details', test_script))
-    
+    mainLogger.info('{}::{}::input(s)::{}'.format('main.py', 'get_test_details', test_script))
+
+    py_tree = py_parser.getPythonParseObject(test_script)
+#     print(test_script)
+    func_assert_parameter_list  = py_parser.getTestNames( py_tree )
     for func_ in func_assert_parameter_list:
 #         print("###############")
 #         print(func_) 
@@ -35,18 +37,25 @@ def get_test_details(test_script):
             the_assert_tup = (test_script, func_[0], tuple([e for e in func_[3]]))
 #             print(the_assert_tup)
             test_with_assert_list.append( the_assert_tup )
-            
+
+    # Log return values for get_test_details
+    mainLogger.info('{}::{}::output(s)::{}::{}'.format('main.py', 'get_test_details', test_name_list, test_with_assert_list))
+      
     return test_name_list, test_with_assert_list
 
 
 def checkClassificationAlgoTest(test_script):
+    
+    # Log algo test input test_script
+    mainLogger = project_logger.projectLogger()
+    mainLogger.info('{}::{}::input(s)::{}'.format('main.py', 'checkClassificationAlgoTest', test_script))
+
     print("algo check: ", test_script)
     py_tree = py_parser.getPythonParseObject(test_script)
     classification_algo_list = py_parser.getClassificationAlgoNames( py_tree ) 
 
-    # Log test imput test_script and result classification_algo_list
-    mainLogger = project_logger.projectLogger()
-    mainLogger.info('{}*{}*{}*{}*{}'.format('main.py', 'chackAttackTest', test_script, classification_algo_list))
+    # Log algo test result classification_algo_list
+    mainLogger.info('{}::{}::output(s)::{}'.format('main.py', 'checkClassificationAlgoTest', classification_algo_list))
 
     if len(classification_algo_list) > 0:
         return 0
@@ -55,13 +64,17 @@ def checkClassificationAlgoTest(test_script):
   
   
 def checkAccuracyTest(test_script):
+    
+    # Log accuracy test imput test_script 
+    mainLogger = project_logger.projectLogger()
+    mainLogger.info('{}::{}::input(s)::{}'.format('main.py', 'checkAccuracyTest', test_script))
+
     print("metric check: ", test_script)
     py_tree = py_parser.getPythonParseObject(test_script)
     metric_list = py_parser.getMetricNames( py_tree ) 
 
-    # Log accuracy test imput test_script and result metric_list 
-    mainLogger = project_logger.projectLogger()
-    mainLogger.info('{}*{}*{}*{}*{}'.format('main.py', 'chackAttackTest', test_script, metric_list))
+    # Log accuracy test output metric_list
+    mainLogger.info('{}::{}::output(s)::{}'.format('main.py', 'checkAccuracyTest', metric_list))
 
     if len(metric_list) > 0:
         return 0
@@ -70,6 +83,10 @@ def checkAccuracyTest(test_script):
     
     
 def chackAttackTest(test_script, assert_list):
+
+    # Log attack inputs test_script and assert_list
+    mainLogger = project_logger.projectLogger()
+    mainLogger.info('{}::{}::input(s)::{}::{}'.format('main.py', 'chackAttackTest', test_script, assert_list))
 
     attack_check = []
     print("attack check: ", test_script)
@@ -81,8 +98,7 @@ def chackAttackTest(test_script, assert_list):
                 attack_check.append(item)
 
     # Log attack imputs test_script/assert_list and attack test result 
-    mainLogger = project_logger.projectLogger()
-    mainLogger.info('{}*{}*{}*{}*{}'.format('main.py', 'chackAttackTest', test_script, assert_list, attack_check))
+    mainLogger.info('{}::{}::output(s)::{}'.format('main.py', 'chackAttackTest', attack_check))
             
     if len(attack_check) > 1:
         return 0
@@ -90,6 +106,12 @@ def chackAttackTest(test_script, assert_list):
         return 1
 
 def runDetectionTest(inp_dir, test_output_csv, test_assert_output_csv, flag_output_csv):
+
+    # Log detection test inputs
+    mainLogger = project_logger.projectLogger()
+    mainLogger.info('{}::{}::input(s)::{}::{}::{}::{}'.format('main.py', 'runDetectionTest', 
+    inp_dir, test_output_csv, test_assert_output_csv, flag_output_csv))
+
     flag_list = []
     df_test_list = []
     df_test_with_assert_list = []
@@ -214,10 +236,19 @@ def runDete(inp_dir, test_output_csv, test_assert_output_csv, flag_output_csv):
 
 if __name__=='__main__': 
 
-	t1 = time.time()
-	print('Started at:', giveTimeStamp() )
-	print('*'*100 )
-	
+    mainLogger = project_logger.projectLogger()
+    mainLogger.info('Starting Logger')
+
+    # Call each function so they actually show up in log file
+    get_test_details('test_script')
+    checkClassificationAlgoTest('test_script')
+    checkAccuracyTest('test_script')
+    chackAttackTest('test_script', 'assert_list')
+
+    t1 = time.time()
+    print('Started at:', giveTimeStamp() )
+    print('*'*100 )
+    
 # 	print('*'*100 )
 # 	repo_dir   = 'example/'
 # 	test_output_csv = 'test_name.csv'
@@ -225,35 +256,37 @@ if __name__=='__main__':
 # 	flag_output_csv = 'test_flag.csv'
 # 	full_dict  = runDete(repo_dir, test_output_csv, test_assert_output_csv, flag_output_csv)
 # 	print('*'*100 )
-	
-	print('*'*100 )
-	repo_dir   = '../../Data/supervised/GITHUB_REPOS/'
-	test_output_csv = '../../Output/TEST_NAME_SUPERVISED_OUTPUT_GITHUB.csv'
-	test_assert_output_csv = '../../Output/TEST_ASSERT_SUPERVISED_OUTPUT_GITHUB.csv'
-	flag_output_csv = '../../Output/FLAG_SUPERVISED_OUTPUT_GITHUB.csv'
-	full_dict  = runDetectionTest(repo_dir, test_output_csv, test_assert_output_csv, flag_output_csv)
-	print('*'*100 )
-	
-	print('*'*100 )
-	repo_dir   = '../../Data/supervised/GITLAB_REPOS/'
-	test_output_csv = '../../Output/TEST_NAME_SUPERVISED_OUTPUT_GITLAB.csv'
-	test_assert_output_csv = '../../Output/TEST_ASSERT_SUPERVISED_OUTPUT_GITLAB.csv'
-	flag_output_csv = '../../Output/FLAG_SUPERVISED_OUTPUT_GITLAB.csv'
-	full_dict  = runDetectionTest(repo_dir, test_output_csv, test_assert_output_csv, flag_output_csv)
-	print('*'*100 )
-	
-	print('*'*100 )
-	repo_dir   = '../../Data/supervised/MODELZOO/'
-	test_output_csv = '../../Output/TEST_NAME_SUPERVISED_OUTPUT_MODELZOO.csv'
-	test_assert_output_csv = '../../Output/TEST_ASSERT_SUPERVISED_OUTPUT_MODELZOO.csv'
-	flag_output_csv = '../../Output/FLAG_SUPERVISED_OUTPUT_MODELZOO.csv'
-	full_dict  = runDetectionTestModelzoo(repo_dir, test_output_csv, test_assert_output_csv, flag_output_csv)
-	print('*'*100 )
- 	
-	print('Ended at:', giveTimeStamp() )
-	print('*'*100 )
-	
-	t2 = time.time()
-	time_diff = round( (t2 - t1 ) / 60, 5) 
-	print('Duration: {} minutes'.format(time_diff) )
-	print('*'*100 )
+    
+    print('*'*100 )
+    repo_dir   = '../../Data/supervised/GITHUB_REPOS/'
+    test_output_csv = 'Output/TEST_NAME_SUPERVISED_OUTPUT_GITHUB.csv'
+    test_assert_output_csv = 'Output/TEST_ASSERT_SUPERVISED_OUTPUT_GITHUB.csv'
+    flag_output_csv = 'Output/FLAG_SUPERVISED_OUTPUT_GITHUB.csv'
+    full_dict  = runDetectionTest(repo_dir, test_output_csv, test_assert_output_csv, flag_output_csv)
+    print('*'*100 )
+    
+    print('*'*100 )
+    repo_dir   = '../../Data/supervised/GITLAB_REPOS/'
+    test_output_csv = 'Output/TEST_NAME_SUPERVISED_OUTPUT_GITLAB.csv'
+    test_assert_output_csv = 'Output/TEST_ASSERT_SUPERVISED_OUTPUT_GITLAB.csv'
+    flag_output_csv = 'Output/FLAG_SUPERVISED_OUTPUT_GITLAB.csv'
+    full_dict  = runDetectionTest(repo_dir, test_output_csv, test_assert_output_csv, flag_output_csv)
+    print('*'*100 )
+    
+    print('*'*100 )
+    repo_dir   = '../../Data/supervised/MODELZOO/'
+    test_output_csv = 'Output/TEST_NAME_SUPERVISED_OUTPUT_MODELZOO.csv'
+    test_assert_output_csv = 'Output/TEST_ASSERT_SUPERVISED_OUTPUT_MODELZOO.csv'
+    flag_output_csv = 'Output/FLAG_SUPERVISED_OUTPUT_MODELZOO.csv'
+    full_dict  = runDetectionTestModelzoo(repo_dir, test_output_csv, test_assert_output_csv, flag_output_csv)
+    print('*'*100 )
+     
+    print('Ended at:', giveTimeStamp() )
+    print('*'*100 )
+    
+    t2 = time.time()
+    time_diff = round( (t2 - t1 ) / 60, 5) 
+    print('Duration: {} minutes'.format(time_diff) )
+    print('*'*100 )
+
+    mainLogger.info('Logger Finished')

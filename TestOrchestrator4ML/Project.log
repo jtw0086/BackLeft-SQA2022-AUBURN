@@ -1,0 +1,12 @@
+29-Nov-22 21:20:26:::root:::INFO:::Starting Logger
+29-Nov-22 21:20:26:::root:::INFO:::main.py::get_test_details::input(s)::test_script
+29-Nov-22 21:20:26:::root:::INFO:::main.py::get_test_details::output(s)::[]::[]
+29-Nov-22 21:20:26:::root:::INFO:::main.py::checkClassificationAlgoTest::input(s)::test_script
+29-Nov-22 21:20:26:::root:::INFO:::main.py::checkClassificationAlgoTest::output(s)::[]
+29-Nov-22 21:20:26:::root:::INFO:::main.py::checkAccuracyTest::input(s)::test_script
+29-Nov-22 21:20:26:::root:::INFO:::main.py::checkAccuracyTest::output(s)::[]
+29-Nov-22 21:20:26:::root:::INFO:::main.py::chackAttackTest::input(s)::test_script::assert_list
+29-Nov-22 21:20:26:::root:::INFO:::main.py::chackAttackTest::output(s)::[]
+29-Nov-22 21:20:26:::root:::INFO:::main.py::runDetectionTest::input(s)::../../Data/supervised/GITHUB_REPOS/::Output/TEST_NAME_SUPERVISED_OUTPUT_GITHUB.csv::Output/TEST_ASSERT_SUPERVISED_OUTPUT_GITHUB.csv::Output/FLAG_SUPERVISED_OUTPUT_GITHUB.csv
+29-Nov-22 21:20:26:::root:::INFO:::main.py::runDetectionTest::input(s)::../../Data/supervised/GITLAB_REPOS/::Output/TEST_NAME_SUPERVISED_OUTPUT_GITLAB.csv::Output/TEST_ASSERT_SUPERVISED_OUTPUT_GITLAB.csv::Output/FLAG_SUPERVISED_OUTPUT_GITLAB.csv
+29-Nov-22 21:20:26:::root:::INFO:::Logger Finished
